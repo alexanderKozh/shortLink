@@ -1,4 +1,3 @@
-
 package com.lex.back;
 
 import com.lex.back.controller.GenerateController;

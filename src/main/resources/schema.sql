@@ -6,6 +6,9 @@ CREATE TABLE link
     simple   VARCHAR(1000) NOT NULL
 );
 
+CREATE INDEX i_link_original ON link(original);
+CREATE INDEX i_link_simple ON link(simple);
+
 DROP TABLE IF EXISTS redirect;
 CREATE TABLE redirect
 (
