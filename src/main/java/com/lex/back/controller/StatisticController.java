@@ -16,10 +16,14 @@ import java.util.List;
 @RequestMapping("stats")
 public class StatisticController {
 
-    @Autowired
-    RedirectRepository redirectRepository;
+    private final RedirectRepository redirectRepository;
 
-    @GetMapping(value = "/{some-short-name}", produces = "application/json")
+    @Autowired
+    public StatisticController(RedirectRepository redirectRepository) {
+        this.redirectRepository = redirectRepository;
+    }
+
+    @GetMapping(value = "/{some-short-name}")
     public StatisticDTO getStatistic(
             @PathVariable(name = "some-short-name") String shortName
     ) {
@@ -27,7 +31,7 @@ public class StatisticController {
                 .orElseThrow(() -> new IllegalStateException("StatisticDTO not found"));
     }
 
-    @GetMapping(value = "", produces = "application/json")
+    @GetMapping
     public List<StatisticDTO> getStatistics(
             @RequestParam(value = "page", defaultValue = "1") @Min(1) Integer page,
             @RequestParam(value = "count", defaultValue = "10") @Min(1) @Max(100) Integer count

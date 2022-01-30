@@ -28,6 +28,6 @@ public interface RedirectRepository extends JpaRepository<Redirect, Long> {
     @Query(nativeQuery = true, value = STATISTICS_QUERY + "WHERE link = :simple")
     Optional<StatisticDTO> getStatisticByShortName(@Param("simple") String simple);
 
-    @Query(nativeQuery = true, value = STATISTICS_QUERY + " ORDER BY rank DESC")
+    @Query(nativeQuery = true, value = STATISTICS_QUERY + " ORDER BY rank ASC")
     List<StatisticDTO> getStatistics(Pageable pageable);
 }
