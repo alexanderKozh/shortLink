@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface LinkRepository extends JpaRepository<Link, Long> {
     Optional<Link> getByOriginal(String original);
+
     Optional<Link> getBySimple(String simple);
 }

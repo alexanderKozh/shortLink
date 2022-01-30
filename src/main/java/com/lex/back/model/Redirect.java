@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Redirect implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
     @Column(name = "link_id")
