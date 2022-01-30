@@ -3,7 +3,9 @@ CREATE TABLE link
 (
     id       BIGINT AUTO_INCREMENT PRIMARY KEY,
     original VARCHAR(1000) NOT NULL,
-    simple   VARCHAR(1000) NOT NULL
+    simple   VARCHAR(1000) NOT NULL,
+    constraint uk_link_original unique (original),
+    constraint uk_link_simple unique (simple)
 );
 
 CREATE INDEX i_link_original ON link (original);
