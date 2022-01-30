@@ -28,7 +28,7 @@ public class StatisticController {
             @PathVariable(name = "some-short-name") String shortName
     ) {
         return redirectRepository.getStatisticByShortName(shortName)
-                .orElseThrow(() -> new IllegalStateException("StatisticDTO not found"));
+                .orElseThrow(() -> new IllegalStateException("Statistics not found"));
     }
 
     @GetMapping
