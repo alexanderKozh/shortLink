@@ -1,6 +1,6 @@
 package com.lex.back.reposiroty;
 
-import com.lex.back.model.Link;
+import com.lex.back.model.entity.Link;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

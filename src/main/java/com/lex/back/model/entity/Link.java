@@ -1,8 +1,7 @@
-package com.lex.back.model;
+package com.lex.back.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name = "link")
@@ -48,26 +47,5 @@ public class Link implements Serializable {
 
     public void setSimple(String shortPath) {
         this.simple = shortPath;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Link link = (Link) o;
-        return Objects.equals(id, link.id) &&
-                Objects.equals(getOriginal(), link.getOriginal()) &&
-                Objects.equals(getSimple(), link.getSimple());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, getOriginal(), getSimple());
     }
 }

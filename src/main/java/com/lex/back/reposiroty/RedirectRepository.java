@@ -1,7 +1,7 @@
 package com.lex.back.reposiroty;
 
-import com.lex.back.model.Redirect;
-import com.lex.back.model.StatisticDTO;
+import com.lex.back.model.entity.Redirect;
+import com.lex.back.model.dto.StatisticDTO;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

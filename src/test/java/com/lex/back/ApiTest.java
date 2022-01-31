@@ -1,6 +1,8 @@
 package com.lex.back;
 
 import com.lex.back.controller.GenerateController;
+import com.lex.back.model.dto.OriginalLinkDTO;
+import com.lex.back.model.dto.ShortLinkDTO;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Test;
@@ -23,51 +25,50 @@ public class ApiTest {
 
     @Test
     public void contextLoads() throws JSONException {
-        String original = "www.google.com";
-        String link = generateShortLink(original);
+        OriginalLinkDTO originalLinkDTO = new OriginalLinkDTO("www.google.com");
+        ShortLinkDTO shortLinkDTO = generateShortLink(originalLinkDTO);
 
-        testRedirect(link);
-        testRedirect(link);
+        testRedirect(shortLinkDTO);
+        testRedirect(shortLinkDTO);
 
-        JSONObject statistic = getStatistic(link.replace(GenerateController.SHORT_LINK_PREFIX, ""));
+        JSONObject statistic = getStatistic(shortLinkDTO);
         assertEquals(statistic.getInt("rank"), 1);
         assertEquals(statistic.getInt("count"), 2);
-        assertEquals(statistic.getString("original"), original);
+        assertEquals(statistic.getString("original"), originalLinkDTO.getOriginal());
     }
 
-    private String generateShortLink(String original) throws JSONException {
-        String generatedLink = webTestClient.post()
-                .uri(
-                        uriBuilder -> uriBuilder.path("generate")
-                                .queryParam("original", original)
-                                .build()
-                )
+    private ShortLinkDTO generateShortLink(OriginalLinkDTO originalLinkDTO) {
+        return webTestClient.post()
+                .uri("generate")
+                .bodyValue(originalLinkDTO)
                 .exchange()
                 .expectStatus()
                 .isOk()
-                .expectBody(String.class)
+                .expectBody(ShortLinkDTO.class)
                 .returnResult()
                 .getResponseBody();
-
-        return new JSONObject(generatedLink).getString("link");
     }
 
-    private void testRedirect(String link) {
+    private void testRedirect(ShortLinkDTO shortLinkDTO) {
         webTestClient.get()
-                .uri(link)
+                .uri(shortLinkDTO.getLink())
                 .exchange()
                 .expectStatus()
                 .is3xxRedirection();
     }
 
-    private JSONObject getStatistic(String shortName) throws JSONException {
+    private JSONObject getStatistic(ShortLinkDTO shortLinkDTO) throws JSONException {
         return new JSONObject(webTestClient.get()
-                .uri("stats/" + shortName)
+                .uri("stats/" + extractShortLinkFromPrefix(shortLinkDTO.getLink()))
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectBody(String.class)
                 .returnResult()
                 .getResponseBody());
+    }
+
+    private String extractShortLinkFromPrefix(String fullLink) {
+        return fullLink.replace(GenerateController.SHORT_LINK_PREFIX, "");
     }
 }

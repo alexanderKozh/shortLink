@@ -1,6 +1,6 @@
 package com.lex.back.controller;
 
-import com.lex.back.model.StatisticDTO;
+import com.lex.back.model.dto.StatisticDTO;
 import com.lex.back.reposiroty.RedirectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;

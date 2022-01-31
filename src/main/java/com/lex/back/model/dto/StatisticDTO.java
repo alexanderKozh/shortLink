@@ -1,4 +1,4 @@
-package com.lex.back.model;
+package com.lex.back.model.dto;
 
 import java.io.Serializable;
 

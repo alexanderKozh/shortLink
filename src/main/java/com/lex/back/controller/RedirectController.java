@@ -2,8 +2,8 @@ package com.lex.back.controller;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import com.lex.back.model.Link;
-import com.lex.back.model.Redirect;
+import com.lex.back.model.entity.Link;
+import com.lex.back.model.entity.Redirect;
 import com.lex.back.reposiroty.LinkRepository;
 import com.lex.back.reposiroty.RedirectRepository;
 import org.springframework.beans.factory.annotation.Autowired;

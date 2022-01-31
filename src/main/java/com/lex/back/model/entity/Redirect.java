@@ -1,9 +1,8 @@
-package com.lex.back.model;
+package com.lex.back.model.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
 @Table(name = "redirect")
@@ -49,25 +48,5 @@ public class Redirect implements Serializable {
 
     public void setMoment(Date moment) {
         this.moment = moment;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        Redirect redirect = (Redirect) o;
-        return Objects.equals(id, redirect.id) &&
-                Objects.equals(linkId, redirect.linkId) &&
-                Objects.equals(moment, redirect.moment);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, linkId, moment);
     }
 }
