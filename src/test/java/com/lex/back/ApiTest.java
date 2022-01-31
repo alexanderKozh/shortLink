@@ -28,8 +28,8 @@ public class ApiTest {
         OriginalLinkDTO originalLinkDTO = new OriginalLinkDTO("www.google.com");
         ShortLinkDTO shortLinkDTO = generateShortLink(originalLinkDTO);
 
-        testRedirect(shortLinkDTO);
-        testRedirect(shortLinkDTO);
+        redirect(shortLinkDTO);
+        redirect(shortLinkDTO);
 
         JSONObject statistic = getStatistic(shortLinkDTO);
         assertEquals(statistic.getInt("rank"), 1);
@@ -49,7 +49,7 @@ public class ApiTest {
                 .getResponseBody();
     }
 
-    private void testRedirect(ShortLinkDTO shortLinkDTO) {
+    private void redirect(ShortLinkDTO shortLinkDTO) {
         webTestClient.get()
                 .uri(shortLinkDTO.getLink())
                 .exchange()
